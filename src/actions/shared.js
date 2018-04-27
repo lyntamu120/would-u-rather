@@ -1,4 +1,4 @@
-import { _getUsers, _getQuestions } from './utils/_DATA.js';
+import { _getUsers, _getQuestions } from '../utils/_DATA.js';
 
 import { showLoading, hideLoading } from 'react-redux-loading';
 
@@ -9,8 +9,8 @@ import { setAuthedUser } from './authedUser';
 const authId = null;
 
 export function handleInitialData() {
-  dispatch(showLoading());
   return (dispatch) => {
+    dispatch(showLoading());
     Promise.all([_getUsers(), _getQuestions()])
       .then(
         (values) => {
