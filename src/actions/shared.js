@@ -6,7 +6,7 @@ import { receiveQuestions } from './questions';
 import { receiveUsers } from './users';
 import { setAuthedUser } from './authedUser';
 
-const authId = null;
+const authId = 'johndoe';
 
 export function handleInitialData() {
   return (dispatch) => {
