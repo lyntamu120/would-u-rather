@@ -107,7 +107,7 @@ li {
 }
 
 .Question-Item {
-  width: 80%;
+  width: 100%;
   padding: 10px;
   padding-left: 20px;
   border: 1px solid black;
@@ -118,4 +118,33 @@ li {
 
 .Question-Item:hover {
   background-color: #eee;
+}
+
+.option-btn {
+  display: block;
+  margin: 20px auto;
+  width: 60%;
+}
+
+.option-btn:hover {
+  background-color: #999;
+  color: #ddd;
+}
+
+.poll-title {
+  margin: 5px auto;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+}
+
+.poll-title > h3 {
+  display: inline-block;
+}
+
+.poll-detail-item {
+  border: 1px solid #000;
+  border-radius: 15px;
+  margin: 50px auto;
+  width: 60%;
 }

@@ -50,7 +50,7 @@ class Dashboard extends Component {
         </div>
           <ul>
             {pollIds.map((id) => (
-              <li key={id}>
+              <li key={id} className='Question-Item'>
                 <Question id={id} />
               </li>
             ))}
