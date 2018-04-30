@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-class Nav extends Component {
-  render() {
-    return(
-      <nav className="nav">
+export default function Nav() {
+  return (
+    <nav className="nav">
+      <ul>
         <li>
           <NavLink to='/' exact activeClassName='active'>
             Home
@@ -20,7 +20,7 @@ class Nav extends Component {
             leaderBoard
           </NavLink>
         </li>
-      </nav>
-    );
-  }
+      </ul>
+    </nav>
+  );
 }

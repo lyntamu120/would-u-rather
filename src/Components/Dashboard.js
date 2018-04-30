@@ -33,7 +33,7 @@ class Dashboard extends Component {
     const pollIds = this.state.unanswered ? unansweredIds : answeredIds;
 
     return (
-      <div className='container'>
+      <div>
         <div className="btn-group">
           <button
             style={{backgroundColor: this.state.leftBgColor}}
