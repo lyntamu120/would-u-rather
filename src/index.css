@@ -81,3 +81,40 @@ li {
   font-size: 15px;
   height: 100px;
 }
+
+.btn-group {
+  text-align: center;
+}
+
+.title-btn {
+  width: 160px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1.5em;
+  display:inline-block;
+}
+
+.left-btn {
+  border-radius: 15px 0 0 15px;
+}
+
+.right-btn {
+  border-radius: 0 15px 15px 0;
+}
+
+.title-btn:focus {
+  outline: none;
+}
+
+.Question-Item {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid black;
+  margin: 5px auto;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.Question-Item:hover {
+  background-color: #eee;
+}

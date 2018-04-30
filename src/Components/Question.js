@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 
 class Question extends Component {
   render() {
-    console.log(this.props);
     return (
-      <div>
+      <div className='Question-Item'>
         <h4>Would you rather</h4>
         <p>{ this.props.optionOne.text } </p>
         <p>{ this.props.optionTwo.text } </p>
