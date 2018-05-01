@@ -126,10 +126,10 @@ li {
   width: 60%;
 }
 
-.option-btn:hover {
+/* .option-btn:hover {
   background-color: #999;
   color: #ddd;
-}
+} */
 
 .poll-title {
   margin: 5px auto;
