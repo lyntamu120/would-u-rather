@@ -107,11 +107,11 @@ li {
 }
 
 .Question-Item {
-  width: 100%;
+  width: 35%;
   padding: 10px;
   padding-left: 20px;
   border: 1px solid black;
-  margin: 5px auto;
+  margin: 15px auto;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -147,4 +147,34 @@ li {
   border-radius: 15px;
   margin: 50px auto;
   width: 60%;
+}
+
+.LeaderBoard-item {
+  border: 1px solid #000;
+  width: 40%;
+  margin: 10px auto;
+  display: flex;
+  /* justify-content: center; */
+}
+
+.avator-name {
+  margin: 15px 20px;
+}
+
+.avator-name > img, .avator-name > h4 {
+  margin-top: 2px;
+}
+
+.score-panel p {
+  padding-top: 15px;
+  margin-left: 10px;
+}
+
+.rank {
+  font-size: 60px;
+  margin: 0;
+  margin-right: 25px;
+  margin-left: 20px;
+  border: none;
+  padding-top: 25px;
 }

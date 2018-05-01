@@ -7,9 +7,9 @@ class Question extends Component {
     const { id, optionOne, optionTwo } = this.props;
     return (
       <Link to={`/question/${id}`}>
-        <h4>Would you rather</h4>
-        <p>{ optionOne.text } </p>
-        <p>{ optionTwo.text } </p>
+        <h4 className='center'>Would you rather</h4>
+        <p className='center'>{ optionOne.text } </p>
+        <p className='center'>{ optionTwo.text } </p>
       </Link>
     );
   }

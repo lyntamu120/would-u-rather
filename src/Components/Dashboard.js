@@ -38,7 +38,8 @@ class Dashboard extends Component {
           <button
             style={{backgroundColor: this.state.leftBgColor}}
             className='title-btn left-btn'
-            onClick={this.changeToUnanswered}>
+            onClick={this.changeToUnanswered}
+          >
             Unanswered
           </button>
           <button
