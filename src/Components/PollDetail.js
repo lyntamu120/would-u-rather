@@ -6,7 +6,8 @@ import { handleSaveQuesAnswer } from '../actions/questions';
 class PollDetail extends Component {
 
   state = {
-    selectedBtn: null
+    style1: this.props.selectedBtn === 'optionOne' ? { outline: 0, fontWeight: 700, borderWidth: "2px" } : null,
+    style2: this.props.selectedBtn === 'optionTwo' ? { outline: 0, fontWeight: 700, borderWidth: "2px" } : null
   }
 
   showInfo = (selector) => {
@@ -28,19 +29,20 @@ class PollDetail extends Component {
     e.preventDefault();
     const opType = e.target.name;
     const { dispatch, qid, authedUser } = this.props;
+    const sty = { outline: 0, fontWeight: 700, borderWidth: "2px" };
+    this.setState(() => ({
+      style1: opType === 'optionOne' ? sty : null,
+      style2: opType === 'optionTwo' ? sty : null
+    }));
     dispatch(handleSaveQuesAnswer({
       authedUser,
       qid,
       answer: opType
     }));
-    this.setState(() => ({
-      selectedBtn: opType
-    }));
   }
 
   render() {
-    const { url, name, opOneText, opTwoText } = this.props;
-    const { selectedBtn } = this.state;
+    const { url, name, opOneText, opTwoText, selectedBtn } = this.props;
 
     return (
       <div className='poll-detail-item'>
@@ -53,25 +55,40 @@ class PollDetail extends Component {
           <h3 className='center'>Would You Rather</h3>
         </div>
 
-        <button className="btn option-btn" name='optionOne' onClick={this.handleVote}>{ opOneText }</button>
-        { selectedBtn === 'optionOne' && this.showInfo(selectedBtn) }
-        <button className="btn option-btn" name='optionTwo' onClick={this.handleVote}>{ opTwoText }</button>
-        { selectedBtn === 'optionTwo' && this.showInfo(selectedBtn) }
+        <button
+          className="btn option-btn"
+          name='optionOne'
+          onClick={this.handleVote}
+          style={this.state.style1}
+        >{ opOneText }</button>
+        { selectedBtn && this.showInfo('optionOne') }
+        <button
+          className="btn option-btn"
+          name='optionTwo'
+          onClick={this.handleVote}
+          style={this.state.style2}
+        >
+          { opTwoText }
+        </button>
+        { selectedBtn && this.showInfo('optionTwo') }
       </div>
     );
   }
 }
 
 function mapStateToProps( { questions, users, authedUser }, props) {
+
   const { id } = props.match.params;
   const question = questions[id];
   const authorName = question['author'];
   const url = users[authorName]['avatarURL'];
+  const selectedBtn = users[authedUser]['answers'][id];
   const numOfUsers = Object.keys(users).length;
   const opOneNum = question.optionOne.votes.length;
   const opTwoNum = question.optionTwo.votes.length;
   const p1 = (opOneNum / numOfUsers * 100).toFixed(2);
   const p2 = (opTwoNum / numOfUsers * 100).toFixed(2);
+
   return {
     url,
     authorName,
@@ -82,7 +99,8 @@ function mapStateToProps( { questions, users, authedUser }, props) {
     p1,
     p2,
     qid: id,
-    authedUser
+    authedUser,
+    selectedBtn
   }
 }
 
