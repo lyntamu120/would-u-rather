@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { handleSaveQuesAnswer } from '../actions/questions';
+
 class PollDetail extends Component {
 
   state = {
@@ -9,7 +11,7 @@ class PollDetail extends Component {
 
   showInfo = (selector) => {
     const { opOneNum, opTwoNum, p1, p2 } = this.props;
-    return selector === 'One'
+    return selector === 'optionOne'
               ? (
                   <div className='center'>
                     <p>Votes: {opOneNum} Percentage: {p1 + '%'}</p>
@@ -24,9 +26,15 @@ class PollDetail extends Component {
 
   handleVote = (e) => {
     e.preventDefault();
-    const name = e.target.name;
+    const opType = e.target.name;
+    const { dispatch, qid, authedUser } = this.props;
+    dispatch(handleSaveQuesAnswer({
+      authedUser,
+      qid,
+      answer: opType
+    }));
     this.setState(() => ({
-      selectedBtn: name
+      selectedBtn: opType
     }));
   }
 
@@ -45,20 +53,20 @@ class PollDetail extends Component {
           <h3 className='center'>Would You Rather</h3>
         </div>
 
-        <button className="btn option-btn" name='One' onClick={this.handleVote}>{ opOneText }</button>
-        { selectedBtn === 'One' && this.showInfo(selectedBtn) }
-        <button className="btn option-btn" name='Two' onClick={this.handleVote}>{ opTwoText }</button>
-        { selectedBtn === 'Two' && this.showInfo(selectedBtn) }
+        <button className="btn option-btn" name='optionOne' onClick={this.handleVote}>{ opOneText }</button>
+        { selectedBtn === 'optionOne' && this.showInfo(selectedBtn) }
+        <button className="btn option-btn" name='optionTwo' onClick={this.handleVote}>{ opTwoText }</button>
+        { selectedBtn === 'optionTwo' && this.showInfo(selectedBtn) }
       </div>
     );
   }
 }
 
-function mapStateToProps( { questions, users }, props) {
+function mapStateToProps( { questions, users, authedUser }, props) {
   const { id } = props.match.params;
   const question = questions[id];
-  const name = question['author'];
-  const url = users[name]['avatarURL'];
+  const authorName = question['author'];
+  const url = users[authorName]['avatarURL'];
   const numOfUsers = Object.keys(users).length;
   const opOneNum = question.optionOne.votes.length;
   const opTwoNum = question.optionTwo.votes.length;
@@ -66,13 +74,15 @@ function mapStateToProps( { questions, users }, props) {
   const p2 = (opTwoNum / numOfUsers * 100).toFixed(2);
   return {
     url,
-    name,
+    authorName,
     opOneText: question.optionOne.text,
     opTwoText: question.optionTwo.text,
     opOneNum,
     opTwoNum,
     p1,
-    p2
+    p2,
+    qid: id,
+    authedUser
   }
 }
 
