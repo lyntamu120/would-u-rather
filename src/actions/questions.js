@@ -1,8 +1,10 @@
 import { showLoading, hideLoading } from 'react-redux-loading';
 
-import { _saveQuestionAnswer } from '../utils/_DATA';
+import { _saveQuestionAnswer, _saveQuestion } from '../utils/_DATA';
+
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const SAVE_QUESTION_ANSWER = 'SAVE_QUESTION_ANSWER';
+export const ADD_QUESTION = 'ADD_QUESTION';
 
 export function receiveQuestions(questions) {
   return {
@@ -34,5 +36,25 @@ export function handleSaveQuesAnswer(info) {
         dispatch(saveQuesAnswer(qid, ohrAnswer, authedUser));
         alert('There are some error saving the answer. Please try again');
       });
+  }
+}
+
+function addQuestion(question) {
+  return {
+    type: ADD_QUESTION,
+    question
+  }
+}
+
+export function handleAddQuestion(question) {
+  return (dispatch, getState) => {
+    const { authedUser } = getState();
+    dispatch(showLoading());
+    return _saveQuestion(question)
+      .then(
+        (q) => {
+          dispatch(addQuestion(q));
+          dispatch(hideLoading());
+        });
   }
 }
