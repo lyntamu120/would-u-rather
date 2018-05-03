@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import Login from './Login';
+
 export default function Nav() {
   return (
     <nav className="nav">
@@ -21,6 +23,7 @@ export default function Nav() {
           </NavLink>
         </li>
       </ul>
+      <Login />
     </nav>
   );
 }

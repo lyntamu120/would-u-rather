@@ -16,6 +16,7 @@ class App extends Component {
     dispatch(handleInitialData());
   }
   render() {
+    const { authedUser } = this.props;
     return (
       <Router>
         <Fragment>
@@ -24,13 +25,15 @@ class App extends Component {
             <Nav />
             <hr/>
             {this.props.loading === true
-              ? <h1>Loading...</h1>
-              : <div>
-                  <Route path='/' exact component={ Dashboard } />
-                  <Route path='/add' component={ NewPoll } />
-                  <Route path='/leaderboard' component={ LeaderBoard } />
-                  <Route path='/question/:id' component={ PollDetail } />
-                </div>
+              ? (<h1>Loading...</h1>)
+              : authedUser === ''
+                ? <h1>Please Login</h1>
+                : (<div>
+                      <Route path='/' exact component={ Dashboard } />
+                      <Route path='/add' component={ NewPoll } />
+                      <Route path='/leaderboard' component={ LeaderBoard } />
+                      <Route path='/question/:id' component={ PollDetail } />
+                   </div>)
             }
           </div>
         </Fragment>
@@ -41,7 +44,8 @@ class App extends Component {
 
 function mapStateToProps({ authedUser }) {
   return {
-    loading: authedUser === null
+    loading: authedUser === null,
+    authedUser
   }
 }
 

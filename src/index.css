@@ -57,6 +57,11 @@ li {
   text-decoration: none;
 }
 
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
 .nav ul {
   display: flex;
   flex-direction: row;
@@ -203,4 +208,17 @@ li {
 
 .newpoll-form button {
   margin-top: 5px;
+}
+
+.login-panel {
+  padding: 25px;
+}
+
+.login-panel button {
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.login-title {
+  display: inline;
 }
